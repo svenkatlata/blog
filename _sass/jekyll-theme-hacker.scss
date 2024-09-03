@@ -1,6 +1,6 @@
 @import "rouge-base16-dark";
 @import "default_colors";
-@import '~@fortawesome/fontawesome-free/scss/all';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
 $body-background: $cod-grey !default;
 $body-foreground: $gallery !default;
@@ -79,9 +79,11 @@ header h1 {
 
 
 header h1:before {
-  content: "\f5fc ";
+  content: "\f5fc";
   font-family: 'Font Awesome 5 Free';
   font-size: 24px;
+  margin-right: 5px;
+  padding-right: 5px;
 }
 
 header h2 {
@@ -250,6 +252,15 @@ a {
   text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
 }
 
+h2 a {
+  color:#b5e853;
+  text-decoration: none;
+}
+
+p a {
+  text-decoration: none;
+}
+
 /* Clearfix */
 
 .cf:before, .cf:after {
@@ -267,4 +278,45 @@ a {
 
 #a-title {
   text-decoration: none;
+}
+
+#posts-container .post {
+  margin-bottom: 20px;
+}
+
+#load-more {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#load-more:hover {
+  background-color: #0056b3;
+}
+
+.post {
+  border-bottom: 1px solid #333; /* Adds a bottom border to separate posts */
+  padding-bottom: 20px; /* Adds space below each post */
+  margin-bottom: 20px; /* Adds space between posts */
+}
+
+.post:last-child {
+  border-bottom: none; /* Removes the border from the last post */
+}
+
+.post-date {
+  font-size: 0.9em;
+}
+
+.post-tags {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.post-tags span{
+  font-style: italic;
 }

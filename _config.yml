@@ -1,5 +1,12 @@
 title: Lata's Blog
-description: The Exploration Lab for AI/ML Enthusiasts!
-show_downloads: true
+description:
+  A hub for cutting-edge machine learning insights and the latest research
+  breakthroughs.
+show_buttons: true
 google_analytics:
 theme: jekyll-theme-hacker
+profile: https://svenkatlata.github.io/
+linkedIn_url: https://www.linkedin.com/in/svenkatlata/
+gitHub_url: https://github.com/svenkatlata
+twitter_url: https://x.com/svenkatlata_
+tableau_url: https://public.tableau.com/app/profile/svenkatlata/vizzes

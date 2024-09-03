@@ -2,122 +2,58 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, ~~strikethrough~~ or `keyword`.
+<div id="posts-container">
+  {% assign posts = site.posts %}
+  {% for post in posts limit: 5 %}
+    <div class="post">
+      <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <p>{{ post.excerpt }}</p>
+      <p><a href="{{ post.url }}">Read more...</a></p>
+      <p class="post-tags">tags: <span>{{ post.tags | join: " - " }}</span></p>
+    </div>
+  {% endfor %}
+</div>
 
-[Link to another page](./another-page.html).
+<button id="load-more">Load More</button>
 
-There should be whitespace between paragraphs.
+<script>
+  let currentIndex = 5; // Start with the first 5 posts shown
+  const increment = 2; // Number of posts to load each time
+  const posts = [
+    {% for post in site.posts %}
+      {
+        url: "{{ post.url }}",
+        title: "{{ post.title }}",
+        date: "{{ post.date | date: "%B %d, %Y" }}",
+        tags: "{{ post.tags | join: ' - ' }}",
+        excerpt: "{{ post.excerpt | strip_newlines }}",
+      },
+    {% endfor %}
+  ];
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+  document.getElementById('load-more').addEventListener('click', function() {
+    const postsContainer = document.getElementById('posts-container');
 
-# Header 1
+    // Load the next set of posts
+    for (let i = currentIndex; i < currentIndex + increment && i < posts.length; i++) {
+      const postHTML = `
+        <div class="post">
+          <p class="post-date">${posts[i].date}</p>
+          <h2><a href="${posts[i].url}">${posts[i].title}</a></h2>
+          <p>${posts[i].excerpt}</p>
+          <p><a href="${posts[i].url}">Read more...</a></p>
+          <p class="post-tags">tags: <span>${posts[i].tags}</span></p>
+        </div>
+      `;
+      postsContainer.innerHTML += postHTML;
+    }
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
-
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
+    currentIndex += increment; // Update currentIndex to reflect all the loaded posts
+    
+    // Hide the button if all posts are loaded
+    if (currentIndex >= posts.length) {
+      document.getElementById('load-more').style.display = 'none';
+    }
+  });
+</script>
