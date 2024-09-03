@@ -1,5 +1,6 @@
 @import "rouge-base16-dark";
 @import "default_colors";
+@import '~@fortawesome/fontawesome-free/scss/all';
 
 $body-background: $cod-grey !default;
 $body-foreground: $gallery !default;
@@ -78,7 +79,8 @@ header h1 {
 
 
 header h1:before {
-  content: "./ ";
+  content: "\f5fc ";
+  font-family: 'Font Awesome 5 Free';
   font-size: 24px;
 }
 
